@@ -1,0 +1,46 @@
+/* Navigation */
+"Nothing To Do" = "Nichts zu Tun";
+"Settings" = "Einstellungen";
+"Done" = "Fertig";
+
+/* Timer */
+"Next mark available in: %@" = "Nächste Markierung verfügbar in: %@";
+
+/* Streaks */
+"Current Streak" = "Aktuelle Serie";
+"Longest Streak" = "Längste Serie";
+"Personal Best!" = "Persönlicher Rekord!";
+
+/* Actions */
+"Mark Today as Done Nothing" = "Heute als Nichts Getan markieren";
+"Already Marked Today" = "Heute bereits markiert";
+"Add a note for today (optional)" = "Notiz für heute hinzufügen (optional)";
+"View History" = "Verlauf anzeigen";
+
+/* Settings */
+"Language" = "Sprache";
+"About" = "Über";
+"Developer" = "Entwickler";
+"Website" = "Webseite";
+"Version" = "Version";
+
+/* Alerts */
+"Error" = "Fehler";
+"OK" = "OK";
+"Achievement Unlocked! 🎉" = "Erfolg freigeschaltet! 🎉";
+"Nice!" = "Toll!";
+
+/* Streak Motivations */
+"Start your journey!" = "Starte deine Reise!";
+"Great start!" = "Toller Start!";
+"You're on fire! 🔥" = "Du bist on fire! 🔥";
+"Incredible week! ⭐️" = "Unglaubliche Woche! ⭐️";
+"Unstoppable! 🚀" = "Unaufhaltsam! 🚀";
+"Legendary! 👑" = "Legendär! 👑";
+
+/* Daily Quotes */
+"Doing nothing is an art, and you're mastering it! 🎨" = "Nichtstun ist eine Kunst, und du meisterst sie! 🎨";
+"Sometimes the best thing to do is nothing at all ✨" = "Manchmal ist das Beste, gar nichts zu tun ✨";
+"Empty time is not empty life - it's pure freedom 🦋" = "Leere Zeit ist kein leeres Leben - es ist pure Freiheit 🦋";
+"Today's achievement: Simply being 🌟" = "Heutiger Erfolg: Einfach sein 🌟";
+"Embrace the beauty of doing nothing 🌺" = "Genieße die Schönheit des Nichtstuns 🌺";

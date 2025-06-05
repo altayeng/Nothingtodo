@@ -1,0 +1,46 @@
+/* Navigation */
+"Nothing To Do" = "Hiçbir Şey Yapmadım";
+"Settings" = "Ayarlar";
+"Done" = "Tamam";
+
+/* Timer */
+"Next mark available in: %@" = "Sonraki işaret şu kadar sürede: %@";
+
+/* Streaks */
+"Current Streak" = "Mevcut Seri";
+"Longest Streak" = "En Uzun Seri";
+"Personal Best!" = "Kişisel Rekor!";
+
+/* Actions */
+"Mark Today as Done Nothing" = "Bugünü Boş Geçti Olarak İşaretle";
+"Already Marked Today" = "Bugün Zaten İşaretlendi";
+"Add a note for today (optional)" = "Bugün için not ekle (isteğe bağlı)";
+"View History" = "Geçmişi Görüntüle";
+
+/* Settings */
+"Language" = "Dil";
+"About" = "Hakkında";
+"Developer" = "Geliştirici";
+"Website" = "Web Sitesi";
+"Version" = "Versiyon";
+
+/* Alerts */
+"Error" = "Hata";
+"OK" = "Tamam";
+"Achievement Unlocked! 🎉" = "Başarı Kilidi Açıldı! 🎉";
+"Nice!" = "Güzel!";
+
+/* Streak Motivations */
+"Start your journey!" = "Yolculuğuna başla!";
+"Great start!" = "Harika başlangıç!";
+"You're on fire! 🔥" = "Ateş gibisin! 🔥";
+"Incredible week! ⭐️" = "İnanılmaz hafta! ⭐️";
+"Unstoppable! 🚀" = "Durdurulamaz! 🚀";
+"Legendary! 👑" = "Efsanevi! 👑";
+
+/* Daily Quotes */
+"Doing nothing is an art, and you're mastering it! 🎨" = "Hiçbir şey yapmamak bir sanattır, ve sen ustasısın! 🎨";
+"Sometimes the best thing to do is nothing at all ✨" = "Bazen yapılacak en iyi şey hiç bir şey yapmamaktır ✨";
+"Empty time is not empty life - it's pure freedom 🦋" = "Boş zaman boş hayat değildir - saf özgürlüktür 🦋";
+"Today's achievement: Simply being 🌟" = "Bugünün başarısı: Sadece var olmak 🌟";
+"Embrace the beauty of doing nothing 🌺" = "Hiçbir şey yapmamanın güzelliğini kucakla 🌺";
