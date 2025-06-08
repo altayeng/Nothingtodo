@@ -23,175 +23,306 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color(.systemBackground)
-                    .edgesIgnoringSafeArea(.all)
+                // Modern gradient background
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(.systemBackground),
+                        Color(.systemGray6).opacity(0.5)
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .edgesIgnoringSafeArea(.all)
                 
-                ScrollView {
-                    VStack(spacing: 25) {
-                        // Countdown Timer Display
-                        Text(String(format: "Next mark available in: %@".localized, timeRemaining))
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.blue)
-                            .padding(.top, 10)
-                            .padding(.horizontal)
-                            .frame(maxWidth: .infinity, alignment: .center)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 32) {
+                        // Custom Header with Settings Button
+                        HStack {
+                            Text("Nothing to Do".localized)
+                                .font(.system(.largeTitle, weight: .bold))
+                                .foregroundColor(.primary)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                showingSettings = true
+                            }) {
+                                Image(systemName: "gearshape.fill")
+                                    .font(.title2)
+                                    .foregroundColor(.blue)
+                                    .frame(width: 44, height: 44)
+                                    .background(
+                                        Circle()
+                                            .fill(.ultraThinMaterial)
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(.blue.opacity(0.3), lineWidth: 1)
+                                            )
+                                    )
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 10)
                         
-                        // Motivational Quote
+                        // Countdown Timer Display with modern design
+                        VStack(spacing: 8) {
+                            Text("Next mark available in".localized)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Text(timeRemaining)
+                                .font(.system(size: 20, weight: .bold, design: .monospaced))
+                                .foregroundColor(.blue)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                                .background(
+                                    Capsule()
+                                        .fill(.ultraThinMaterial)
+                                        .overlay(
+                                            Capsule()
+                                                .stroke(Color.blue.opacity(0.3), lineWidth: 1)
+                                        )
+                                )
+                        }
+                        .padding(.top, 10)
+                        
+                        // Motivational Quote with glassmorphism effect
                         Text(dailyQuote)
-                            .font(.system(.headline, design: .rounded))
-                            .foregroundColor(.secondary)
+                            .font(.system(.title3, design: .rounded, weight: .medium))
+                            .foregroundColor(.primary)
                             .multilineTextAlignment(.center)
-                            .padding()
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 20)
                             .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color(.systemGray6))
-                                    .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+                                RoundedRectangle(cornerRadius: 24)
+                                    .fill(.ultraThinMaterial)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 24)
+                                            .stroke(.linearGradient(
+                                                colors: [.white.opacity(0.5), .clear],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ), lineWidth: 1)
+                                    )
+                                    .shadow(color: Color.black.opacity(0.08), radius: 20, x: 0, y: 8)
                             )
                             .padding(.horizontal)
                         
-                        // Streak Cards with Achievement Badges
-                        HStack(spacing: 15) {
+                        // Modern Streak Cards with improved layout
+                        VStack(spacing: 16) {
                             // Current Streak Card
-                            VStack {
-                                ZStack {
-                                    Text("\(currentStreak)")
-                                        .font(.system(size: 48, weight: .bold, design: .rounded))
-                                        .foregroundColor(.primary)
+                            VStack(spacing: 12) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Current Streak".localized)
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                        
+                                        HStack(alignment: .bottom, spacing: 8) {
+                                            Text("\(currentStreak)")
+                                                .font(.system(size: 36, weight: .bold, design: .rounded))
+                                                .foregroundColor(.primary)
+                                            
+                                            Text("days")
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                                .offset(y: -4)
+                                        }
+                                        
+                                        Text(streakMotivation)
+                                            .font(.caption)
+                                            .foregroundColor(.blue)
+                                    }
                                     
-                                    // Achievement Badge
-                                    if currentStreak >= 7 {
-                                        Image(systemName: "star.circle.fill")
-                                            .font(.title)
-                                            .foregroundColor(.yellow)
-                                            .offset(x: 30, y: -30)
+                                    Spacer()
+                                    
+                                    ZStack {
+                                        Circle()
+                                            .fill(.blue.opacity(0.1))
+                                            .frame(width: 50, height: 50)
+                                        
+                                        Image(systemName: currentStreak >= 7 ? "star.fill" : "calendar")
+                                            .font(.title2)
+                                            .foregroundColor(.blue)
                                     }
                                 }
-                                
-                                Text("Current Streak".localized)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                
-                                Text(streakMotivation)
-                                    .font(.caption)
-                                    .foregroundColor(.blue)
-                                    .multilineTextAlignment(.center)
-                                    .padding(.top, 5)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 20)
+                            .padding(20)
                             .background(
                                 RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color(.systemGray6))
-                                    .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+                                    .fill(.ultraThinMaterial)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(.linearGradient(
+                                                colors: [.blue.opacity(0.3), .clear],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ), lineWidth: 1)
+                                    )
+                                    .shadow(color: Color.blue.opacity(0.1), radius: 15, x: 0, y: 6)
                             )
                             
                             // Longest Streak Card
-                            VStack {
-                                ZStack {
-                                    Text("\(longestStreak)")
-                                        .font(.system(size: 48, weight: .bold, design: .rounded))
-                                        .foregroundColor(.primary)
+                            VStack(spacing: 12) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Longest Streak".localized)
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                        
+                                        HStack(alignment: .bottom, spacing: 8) {
+                                            Text("\(longestStreak)")
+                                                .font(.system(size: 36, weight: .bold, design: .rounded))
+                                                .foregroundColor(.primary)
+                                            
+                                            Text("days")
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                                .offset(y: -4)
+                                        }
+                                        
+                                        Text("Personal Best!".localized)
+                                            .font(.caption)
+                                            .foregroundColor(.orange)
+                                    }
                                     
-                                    // Record Badge
-                                    if longestStreak >= 30 {
-                                        Image(systemName: "crown.fill")
-                                            .font(.title)
-                                            .foregroundColor(.yellow)
-                                            .offset(x: 30, y: -30)
+                                    Spacer()
+                                    
+                                    ZStack {
+                                        Circle()
+                                            .fill(.orange.opacity(0.1))
+                                            .frame(width: 50, height: 50)
+                                        
+                                        Image(systemName: longestStreak >= 30 ? "crown.fill" : "trophy")
+                                            .font(.title2)
+                                            .foregroundColor(.orange)
                                     }
                                 }
-                                
-                                Text("Longest Streak".localized)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                
-                                Text("Personal Best!".localized)
-                                    .font(.caption)
-                                    .foregroundColor(.orange)
-                                    .multilineTextAlignment(.center)
-                                    .padding(.top, 5)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 20)
+                            .padding(20)
                             .background(
                                 RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color(.systemGray6))
-                                    .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+                                    .fill(.ultraThinMaterial)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(.linearGradient(
+                                                colors: [.orange.opacity(0.3), .clear],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ), lineWidth: 1)
+                                    )
+                                    .shadow(color: Color.orange.opacity(0.1), radius: 15, x: 0, y: 6)
                             )
                         }
                         .padding(.horizontal)
                         
-                        // Mark Today Section
-                        VStack(spacing: 15) {
-                            // Mark Today Button
+                        // Modern Mark Today Section
+                        VStack(spacing: 16) {
+                            // Mark Today Button with enhanced design
                             Button {
                                 Task {
                                     await markToday()
                                 }
                             } label: {
-                                HStack {
+                                HStack(spacing: 12) {
                                     Image(systemName: canMarkToday ? "checkmark.circle.fill" : "checkmark.circle")
                                         .font(.title2)
+                                        .foregroundColor(canMarkToday ? .white : .secondary)
+                                    
                                     Text(todayStatus.localized)
-                                        .font(.headline)
+                                        .font(.system(.title3, weight: .semibold))
+                                        .foregroundColor(canMarkToday ? .white : .secondary)
                                 }
-                                .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
                                 .background(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .fill(canMarkToday ? Color.blue : Color.gray)
-                                        .shadow(color: canMarkToday ? Color.blue.opacity(0.3) : Color.gray.opacity(0.3), radius: 10, x: 0, y: 5)
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(canMarkToday ? 
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [.blue, .blue.opacity(0.8)]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ) : 
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [Color(.systemGray4), Color(.systemGray5)]),
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                        )
+                                        .shadow(
+                                            color: canMarkToday ? Color.blue.opacity(0.3) : Color.gray.opacity(0.2), 
+                                            radius: canMarkToday ? 15 : 8, 
+                                            x: 0, 
+                                            y: canMarkToday ? 6 : 3
+                                        )
                                 )
+                                .scaleEffect(canMarkToday ? 1.0 : 0.98)
                             }
                             .disabled(!canMarkToday)
+                            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: canMarkToday)
                             
-                            // Note Input Field (only shown when canMarkToday)
+                            // Modern Note Input Field
                             if canMarkToday {
-                                TextField("Add a note for today (optional)".localized, text: $newNote)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .padding(.horizontal)
-                                    .padding(.vertical, 8)
+                                TextField("Add a note for today (optional)".localized, text: $newNote, axis: .vertical)
+                                    .lineLimit(3...6)
+                                    .font(.body)
+                                    .padding(10)
                                     .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color(.systemBackground))
-                                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .fill(.ultraThinMaterial)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 16)
+                                                    .stroke(Color(.systemGray4), lineWidth: 1)
+                                            )
                                     )
+                                    .transition(.asymmetric(
+                                        insertion: .scale.combined(with: .opacity).animation(.spring(response: 0.4)),
+                                        removal: .scale.combined(with: .opacity).animation(.easeInOut(duration: 0.2))
+                                    ))
                             }
                         }
                         .padding(.horizontal)
-                        .animation(.spring(), value: canMarkToday)
                         
-                        // History Navigation Link
+                        // Modern History Navigation Link
                         NavigationLink(destination: HistoryView()) {
-                            HStack {
-                                Text("View History".localized)
-                                    .font(.headline)
+                            HStack(spacing: 16) {
+                                Image(systemName: "clock.arrow.circlepath")
+                                    .font(.title2)
+                                    .foregroundColor(.blue)
+                                
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("View History".localized)
+                                        .font(.headline)
+                                        .foregroundColor(.primary)
+                                    
+                                    Text("See your progress over time")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                
                                 Spacer()
+                                
                                 Image(systemName: "chevron.right")
+                                    .font(.footnote)
+                                    .foregroundColor(.secondary)
                             }
-                            .padding()
+                            .padding(20)
                             .background(
-                                RoundedRectangle(cornerRadius: 15)
-                                    .fill(Color(.systemGray6))
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(.ultraThinMaterial)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color(.systemGray5), lineWidth: 1)
+                                    )
                             )
                             .padding(.horizontal)
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .padding(.vertical)
+                    .padding(.vertical, 20)
                 }
             }
-            .navigationTitle("Nothing To Do".localized)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showingSettings = true
-                    }) {
-                        Image(systemName: "gearshape")
-                    }
-                }
-            }
+            .navigationBarHidden(true)
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
             }
@@ -313,6 +444,7 @@ struct ContentView: View {
         var longest = 0
         var previousDate: Date?
         let calendar = Calendar.current
+        let now = Date()
         
         guard let firstEntry = items.first?.timestamp else {
             currentStreak = 0
@@ -320,30 +452,68 @@ struct ContentView: View {
             return
         }
         
-        if !calendar.isDateInToday(firstEntry) && 
-           !calendar.isDateInYesterday(firstEntry) {
-            currentStreak = 0
-        } else {
+        // Check if streak should be broken due to 26+ hour gap
+        let hoursSinceLastEntry = Calendar.current.dateComponents([.hour], from: firstEntry, to: now).hour ?? 0
+        
+        // If last entry was today, continue current streak
+        if calendar.isDateInToday(firstEntry) {
             current = 1
             previousDate = firstEntry
+        }
+        // If last entry was yesterday and within 26 hours, continue streak
+        else if calendar.isDateInYesterday(firstEntry) && hoursSinceLastEntry < 26 {
+            current = 1
+            previousDate = firstEntry
+        }
+        // If more than 26 hours have passed, break the streak
+        else {
+            currentStreak = 0
+            // Still calculate longest streak from history
+            var tempStreak = 1
+            previousDate = nil
             
-            for item in items.dropFirst() {
+            for item in items {
                 guard let date = item.timestamp else { continue }
                 
                 if let previous = previousDate {
                     let dayDifference = calendar.dateComponents([.day], from: date, to: previous).day ?? 0
+                    let hourDifference = calendar.dateComponents([.hour], from: date, to: previous).hour ?? 0
                     
-                    if dayDifference == 1 {
-                        current += 1
+                    // Check if entries are consecutive days and within 26 hours
+                    if dayDifference == 1 && hourDifference < 26 {
+                        tempStreak += 1
+                        longest = max(longest, tempStreak)
                     } else {
-                        break
+                        tempStreak = 1
                     }
                 }
                 previousDate = date
             }
-            currentStreak = current
+            
+            longestStreak = longest
+            return
         }
         
+        // Calculate current streak from consecutive days
+        for item in items.dropFirst() {
+            guard let date = item.timestamp else { continue }
+            
+            if let previous = previousDate {
+                let dayDifference = calendar.dateComponents([.day], from: date, to: previous).day ?? 0
+                let hourDifference = calendar.dateComponents([.hour], from: date, to: previous).hour ?? 0
+                
+                // Check if entries are consecutive days and within 26 hours
+                if dayDifference == 1 && hourDifference < 26 {
+                    current += 1
+                } else {
+                    break
+                }
+            }
+            previousDate = date
+        }
+        currentStreak = current
+        
+        // Calculate longest streak from all history
         var tempStreak = 1
         previousDate = nil
         
@@ -352,8 +522,10 @@ struct ContentView: View {
             
             if let previous = previousDate {
                 let dayDifference = calendar.dateComponents([.day], from: date, to: previous).day ?? 0
+                let hourDifference = calendar.dateComponents([.hour], from: date, to: previous).hour ?? 0
                 
-                if dayDifference == 1 {
+                // Check if entries are consecutive days and within 26 hours
+                if dayDifference == 1 && hourDifference < 26 {
                     tempStreak += 1
                     longest = max(longest, tempStreak)
                 } else {

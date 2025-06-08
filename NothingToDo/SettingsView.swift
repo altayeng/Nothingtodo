@@ -1,8 +1,10 @@
 import SwiftUI
+import CoreData
 
 struct SettingsView: View {
     @EnvironmentObject private var languageManager: LanguageManager
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
     
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
     private let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
@@ -35,6 +37,17 @@ struct SettingsView: View {
                     
                     LabeledContent("Version".localized, value: "\(appVersion) (\(buildNumber))")
                 }
+                
+                #if DEBUG
+                Section(header: Text("Debug Options")) {
+                    Button(action: {
+                        TestDataGenerator.generateOneMonthStreak(context: viewContext)
+                    }) {
+                        Text("Generate 1 Month Test Data")
+                            .foregroundColor(.blue)
+                    }
+                }
+                #endif
             }
             .id(languageManager.refreshToggle)
             .navigationTitle("Settings".localized)
